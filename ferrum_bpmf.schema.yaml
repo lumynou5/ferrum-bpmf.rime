@@ -1,0 +1,63 @@
+# Rime schema
+# encoding: utf-8
+
+schema:
+  schema_id: ferrum_bpmf
+  name: 鐵注音
+  version: 0.1.0
+  author:
+    - Lumynous <lumynou5.tw@gmail.com>
+  description: 二十六鍵注音輸入法方案
+
+switches:
+  - name: ascii_mode
+    states: [ 中文, 西文 ]
+  - name: full_shape
+    states: [ 半形, 全形 ]
+  - name: simplification
+    states: [ 漢字, 汉字 ]
+
+engine:
+  processors:
+    - ascii_composser
+    - recognizer
+    - key_binder
+    - speller
+    - punctuator
+    - selector
+    - express_editor
+  segmentors:
+    - ascii_segmentor
+    - matcher
+    - abc_segmentor
+    - punct_segmentor
+    - fallback_segmentor
+  translators:
+    - echo_translator
+    - punct_translator
+    - script_translator
+  filters:
+    - simplifier
+    - uniquifier
+
+speller:
+  alphabet: 'abcdefghijklmnopqrstuvwxyz '
+  use_space: true
+  algebra:
+    - abbrev/^(\S+)[ˉˊˇˋ˙]$/$1/
+    - xlit/ㄅㄆㄇㄈㄉㄊㄋㄌㄍㄎㄏㄐㄑㄒㄓㄔㄕㄖㄗㄘㄙㄧㄨㄩㄚㄛㄜㄝㄞㄟㄠㄡㄢㄣㄤㄥㄦˉˊˇˋ˙/bpmfdtnlgkhjqxzcsrjqxywvheeeiauoknlmr dfgj/
+
+translator:
+  dictionary: ferrum_bpmf
+  preedit_format:
+    - xform/ /ˉ/
+    - xform/([^ˉdfgj])d/$1ˊ/
+    - xform/([^ˉˊfgj])f/$1ˇ/
+    - xform/([^ˉˊˇgj])g/$1ˋ/
+    - xform/([^ˉˊˇˋj])j/$1˙/
+    - xform/([jqx])([^yv])/\U$1\E$2/
+    - xform/([^ˉˊˇˋ˙])([hknlmr])/$1\U$2\E/
+    - xform/([hknlmr])([ˉˊˇˋ˙])/\U$1\E$2/
+    - xform/([bpmfw])e/$1ㄛ/
+    - xform/([yv])e/$1ㄝ/
+    - xlit/bpmfdtnlgkhjqxzcsrJQXywvHeiauoKNLMR/ㄅㄆㄇㄈㄉㄊㄋㄌㄍㄎㄏㄐㄑㄒㄓㄔㄕㄖㄗㄘㄙㄧㄨㄩㄚㄜㄞㄟㄠㄡㄢㄣㄤㄥㄦ/
