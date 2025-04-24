@@ -44,7 +44,7 @@ speller:
   alphabet: 'abcdefghijklmnopqrstuvwxyz '
   use_space: true
   algebra:
-    - abbrev/^(\S+)[ˉˊˇˋ˙]$/$1/
+    - xform/^(ㄛ|ㄝ)/ee/
     - xlit/ㄅㄆㄇㄈㄉㄊㄋㄌㄍㄎㄏㄐㄑㄒㄓㄔㄕㄖㄗㄘㄙㄧㄨㄩㄚㄛㄜㄝㄞㄟㄠㄡㄢㄣㄤㄥㄦˉˊˇˋ˙/bpmfdtnlgkhjqxzcsrjqxywvheeeiauoknlmr dfgj/
 
 translator:
@@ -60,4 +60,5 @@ translator:
     - xform/([hknlmr])([ˉˊˇˋ˙])/\U$1\E$2/
     - xform/([bpmfw])e/$1ㄛ/
     - xform/([yv])e/$1ㄝ/
+    - xform/ee/ㄛ/
     - xlit/bpmfdtnlgkhjqxzcsrJQXywvHeiauoKNLMR/ㄅㄆㄇㄈㄉㄊㄋㄌㄍㄎㄏㄐㄑㄒㄓㄔㄕㄖㄗㄘㄙㄧㄨㄩㄚㄜㄞㄟㄠㄡㄢㄣㄤㄥㄦ/
